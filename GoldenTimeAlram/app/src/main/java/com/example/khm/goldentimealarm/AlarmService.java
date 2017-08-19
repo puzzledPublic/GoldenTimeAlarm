@@ -71,9 +71,14 @@ public class AlarmService extends Service{
         try {
             thread.join();
             if(!time.contains("??:??")) {
+
+                int index = time.indexOf("var date");   //기준 날짜시간
+                int hour = Integer.parseInt(time.substring(index + 46, index + 48));
+                int minute = Integer.parseInt(time.substring(index + 57, index + 59));
+
                 now = new Date();   //현재 날짜
                 //1900 + a값, month - 1, date, time
-                then = new Date(2017-1900, now.getMonth(), now.getDate(), 22, 0);
+                then = new Date(2017-1900, now.getMonth(), now.getDate(), hour, minute);
                 int Total_sec = (int)Math.floor((then.getTime() - now.getTime())/1000) - 13;
                 String remainTime = Day_counter(Total_sec); //남은 시간
                 //Notification 발생
